@@ -1,6 +1,7 @@
 import tornado.web
 import tornado.ioloop
-
+import tornado.httpserver
+import os
 class basicRequestHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
@@ -49,13 +50,27 @@ class staticRequestHandler2(tornado.web.RequestHandler):
         self.write(str(suma))
         
         self.render("texto.html")
+def main():
+    settings = dict(
+        
+        cookie_secret=str(os.urandom(45)),
+        template_path=os.path.join(os.path.dirname(__file__), "templates"),
+        static_path=os.path.join(os.path.dirname(__file__), "static"),
+        xsrf_cookies=True,
+        autoreload=True,
+        gzip=True,
+        debug=True,
 
-if __name__== "__main__":
-    app=tornado.web.Application([
+
+        )
+    application = tornado.web.Application([
         (r"/",basicRequestHandler),
         (r"/numeros", staticRequestHandler),
         (r"/texto", staticRequestHandler2)
-        ])
-    app.listen(8881)
-    print("escuchando por el puerto 8881")
-    tornado.ioloop.IOLoop.current().start()
+        ],**settings)
+    http_server = tornado.httpserver.HTTPServer(application)
+    port = int(os.environ.get("PORT", 5000))
+    http_server.listen(port)
+    tornado.ioloop.IOLoop.instance().start()
+if __name__== "__main__":
+    main()
