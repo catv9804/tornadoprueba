@@ -6,10 +6,9 @@ import tornado.httpserver
 import tornado.options
 from tornado.options import define, options
 
-define("environment", default="development", help="Pick you environment", type=str)
-define("site_title", default="Tornado Example", help="Site Title", type=str)
+define("site_title", default="Tornado Prueba", help="Site Title", type=str)
 define("cookie_secret", default="sooooooosecret", help="Your secret cookie dough", type=str)
-define("port", default="8000", help="Listening port", type=str)
+define("port", default="8881", help="Listening port", type=str)
 class basicRequestHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
@@ -87,14 +86,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-"""
-if __name__== "__main__":
-    app=tornado.web.Application([
-        (r"/",basicRequestHandler),
-        (r"/numeros", staticRequestHandler),
-        (r"/texto", staticRequestHandler2)
-        ])
-    app.listen(80)
-    print("escuchando por el puerto 80")
-    tornado.ioloop.IOLoop.current().start()
-"""
+
