@@ -52,12 +52,8 @@ class staticRequestHandler2(tornado.web.RequestHandler):
         self.render("texto.html")
 def main():
     settings = dict(
-        
-        cookie_secret=str(os.urandom(45)),
         template_path=os.path.join(os.path.dirname(__file__), "templates"),
         static_path=os.path.join(os.path.dirname(__file__), "static"),
-
-
 
         )
     application = tornado.web.Application([
