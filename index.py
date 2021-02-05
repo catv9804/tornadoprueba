@@ -56,6 +56,6 @@ if __name__== "__main__":
         (r"/numeros", staticRequestHandler),
         (r"/texto", staticRequestHandler2)
         ])
-    app.listen(8080)
-    print("escuchando por el puerto 8080")
+    app.listen(80)
+    print("escuchando por el puerto 80")
     tornado.ioloop.IOLoop.current().start()
